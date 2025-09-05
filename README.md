@@ -7,6 +7,15 @@ Rails 8 を用いた **アンケート（投票）アプリ** の開発を、
 
 ![Preview](./docs/assets/screenshot.jpeg)
 
+### 🌐 Live Demo
+
+**Demo URL**: https://ai-agent-bakeoff-polls-codex.up.railway.app/
+
+⚠️ **注意**:
+- テスト環境のため、アクセスできない場合があります
+- 個人情報や機密情報の入力は絶対に避けてください
+- データは定期的にリセットされます
+
 ## 🚀 プロジェクト概要
 
 - **テーマ**: 投票アプリ（Poll / Choice / Vote モデル）

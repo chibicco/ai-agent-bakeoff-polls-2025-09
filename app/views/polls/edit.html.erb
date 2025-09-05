@@ -1,0 +1,54 @@
+<div>
+  <h1 class="text-3xl font-bold text-slate-900 mb-8">アンケート編集</h1>
+
+  <div class="bg-white border border-slate-200 rounded-2xl shadow-sm p-8">
+    <%= form_with model: @poll, local: true do |f| %>
+      <% if @poll.errors.any? %>
+        <div class="bg-rose-50 border border-rose-200 rounded-lg p-4 mb-6">
+          <h3 class="font-medium text-rose-900 mb-2">エラーが発生しました:</h3>
+          <ul class="list-disc list-inside text-sm text-rose-700">
+            <% @poll.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="space-y-6">
+        <div>
+          <%= f.label :title, "タイトル", class: "block text-sm font-medium text-slate-900 mb-2" %>
+          <%= f.text_field :title, 
+              class: "w-full px-4 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent" %>
+        </div>
+
+        <div>
+          <%= f.label :description, "説明", class: "block text-sm font-medium text-slate-900 mb-2" %>
+          <%= f.text_area :description, rows: 3,
+              class: "w-full px-4 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent" %>
+        </div>
+
+        <div>
+          <%= f.label :ends_at, "締切日時", class: "block text-sm font-medium text-slate-900 mb-2" %>
+          <%= f.datetime_field :ends_at,
+              class: "w-full px-4 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent" %>
+          <p class="text-sm text-slate-500 mt-1">※空欄の場合は無期限</p>
+        </div>
+
+        <div>
+          <%= f.label :status, "ステータス", class: "block text-sm font-medium text-slate-900 mb-2" %>
+          <%= f.select :status, 
+              options_for_select([["下書き", "draft"], ["公開", "open"], ["終了", "closed"]], @poll.status),
+              {},
+              class: "w-full px-4 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent" %>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-3 mt-8 pt-6 border-t">
+        <%= f.submit "更新する", 
+            class: "px-6 py-3 bg-indigo-600 text-white font-medium rounded-lg hover:bg-indigo-700 transition cursor-pointer" %>
+        <%= link_to "キャンセル", @poll,
+            class: "px-6 py-3 text-slate-600 hover:text-slate-900 transition" %>
+      </div>
+    <% end %>
+  </div>
+</div>

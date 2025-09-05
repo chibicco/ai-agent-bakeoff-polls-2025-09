@@ -1,0 +1,62 @@
+<div>
+  <h1 class="text-3xl font-bold text-slate-900 mb-8">アンケート一覧</h1>
+
+  <div class="space-y-4">
+    <% @polls.each do |poll| %>
+      <div class="bg-white border border-slate-200 rounded-2xl shadow-sm p-6 hover:shadow-md transition">
+        <div class="flex items-start justify-between mb-4">
+          <div>
+            <h2 class="text-xl font-semibold text-slate-900 mb-2">
+              <%= link_to poll.title, poll, class: "hover:text-indigo-600 transition" %>
+            </h2>
+            <p class="text-slate-600 text-sm"><%= poll.description %></p>
+          </div>
+          
+          <% if poll.status == "draft" %>
+            <span class="px-3 py-1 bg-slate-100 text-slate-700 text-sm font-medium rounded-full">
+              下書き
+            </span>
+          <% elsif poll.status == "open" %>
+            <span class="px-3 py-1 bg-green-100 text-green-700 text-sm font-medium rounded-full">
+              受付中
+            </span>
+          <% else %>
+            <span class="px-3 py-1 bg-rose-100 text-rose-700 text-sm font-medium rounded-full">
+              終了
+            </span>
+          <% end %>
+        </div>
+
+        <div class="flex items-center justify-between text-sm text-slate-500">
+          <div class="flex items-center gap-4">
+            <span>選択肢: <%= poll.choices.count %>個</span>
+            <span>投票数: <%= poll.votes.count %></span>
+            <% if poll.ends_at.present? %>
+              <span>締切: <%= poll.ends_at.strftime("%Y年%m月%d日 %H:%M") %></span>
+            <% end %>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <% if poll.status == "draft" %>
+              <%= button_to "公開", open_poll_path(poll), method: :post, 
+                  class: "px-3 py-1 bg-indigo-600 text-white text-sm rounded hover:bg-indigo-700 transition" %>
+            <% elsif poll.status == "open" %>
+              <%= button_to "終了", close_poll_path(poll), method: :post,
+                  class: "px-3 py-1 bg-rose-600 text-white text-sm rounded hover:bg-rose-700 transition" %>
+            <% end %>
+            <%= link_to "編集", edit_poll_path(poll), 
+                class: "px-3 py-1 bg-slate-200 text-slate-700 text-sm rounded hover:bg-slate-300 transition" %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+
+    <% if @polls.empty? %>
+      <div class="text-center py-12">
+        <p class="text-slate-500 mb-4">まだアンケートがありません</p>
+        <%= link_to "最初のアンケートを作成", new_poll_path, 
+            class: "inline-block px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition" %>
+      </div>
+    <% end %>
+  </div>
+</div>

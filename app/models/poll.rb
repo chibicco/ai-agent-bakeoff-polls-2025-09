@@ -4,6 +4,8 @@ class Poll < ApplicationRecord
   has_many :choices, dependent: :destroy
   has_many :votes, dependent: :destroy
 
+  accepts_nested_attributes_for :choices, allow_destroy: true, reject_if: :all_blank
+
   validates :title, presence: true
   validates :slug, uniqueness: true, allow_blank: false
 

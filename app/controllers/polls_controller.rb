@@ -11,6 +11,7 @@ class PollsController < ApplicationController
 
   def new
     @poll = Poll.new
+    3.times { @poll.choices.build }
   end
 
   def create
@@ -24,6 +25,7 @@ class PollsController < ApplicationController
   end
 
   def edit
+    @poll.choices.build if @poll.choices.empty?
   end
 
   def update
@@ -51,6 +53,7 @@ class PollsController < ApplicationController
   end
 
   def poll_params
-    params.require(:poll).permit(:title, :description, :ends_at, :status)
+    params.require(:poll).permit(:title, :description, :ends_at, :status,
+      choices_attributes: [:id, :label, :_destroy])
   end
 end

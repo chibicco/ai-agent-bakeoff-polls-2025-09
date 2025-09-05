@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  poll: one
+  choice: one
+  voter_hash: MyString
+
+two:
+  poll: two
+  choice: two
+  voter_hash: MyString

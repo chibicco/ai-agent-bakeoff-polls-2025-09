@@ -19,6 +19,10 @@ class Poll < ApplicationRecord
     status == "closed" || (ends_at.present? && ends_at <= Time.current)
   end
 
+  def to_param
+    slug
+  end
+
   private
 
   def generate_slug

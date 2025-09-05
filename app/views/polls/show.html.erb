@@ -24,6 +24,26 @@
         <dd class="text-slate-800 font-medium"><%= @poll.ends_at&.in_time_zone("Asia/Tokyo")&.strftime("%Y-%m-%d %H:%M") || "設定なし" %></dd>
       </div>
     </dl>
+    <div class="mt-8">
+      <% voted = cookies.signed["voted_#{@poll.slug}"] == "1" %>
+      <% if @poll.votable? && !voted %>
+        <%= form_with url: poll_votes_path(@poll), method: :post, class: "space-y-4" do %>
+          <fieldset>
+            <legend class="text-sm font-medium text-slate-700">1つ選んでください</legend>
+            <div class="mt-3 space-y-2">
+              <% @poll.choices.each do |choice| %>
+                <label class="flex items-center gap-3 text-slate-800">
+                  <input type="radio" name="choice_id" value="<%= choice.id %>" class="h-4 w-4 text-indigo-600 border-slate-300 focus:ring-indigo-500">
+                  <span><%= choice.label %></span>
+                </label>
+              <% end %>
+            </div>
+          </fieldset>
+          <%= submit_tag "投票する", class: "inline-flex items-center rounded-lg bg-indigo-600 px-4 py-2 text-white hover:bg-indigo-700" %>
+        <% end %>
+      <% else %>
+        <p class="text-slate-600">投票は締切または公開終了です。結果表示は次フェーズで整えます。</p>
+      <% end %>
+    </div>
   </div>
 </div>
-

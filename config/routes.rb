@@ -8,5 +8,6 @@ Rails.application.routes.draw do
       post :open
       post :close
     end
+    resources :votes, only: [:create]
   end
 end

@@ -1,0 +1,42 @@
+ja:
+  activerecord:
+    models:
+      poll: アンケート
+      choice: 選択肢
+      vote: 投票
+    attributes:
+      poll:
+        title: タイトル
+        description: 説明
+        slug: スラッグ
+        status: ステータス
+        ends_at: 締切日時
+      choice:
+        label: ラベル
+        votes_count: 投票数
+      vote:
+        voter_hash: 投票者ハッシュ
+    errors:
+      models:
+        vote:
+          attributes:
+            poll:
+              not_open: "は投票を受け付けていません"
+            choice:
+              invalid: "が正しくありません"
+  
+  errors:
+    messages:
+      taken: "は既に使用されています"
+  
+  date:
+    formats:
+      default: "%Y年%m月%d日"
+      short: "%m/%d"
+      long: "%Y年%m月%d日(%a)"
+  
+  time:
+    formats:
+      default: "%Y年%m月%d日 %H:%M:%S"
+      short: "%m/%d %H:%M"
+      long: "%Y年%m月%d日(%a) %H時%M分%S秒"

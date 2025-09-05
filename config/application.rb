@@ -33,7 +33,8 @@ module AiAgentBakeoffPolls202509
     # These settings can be overridden in specific environments using the files
     # in config/environments, which are processed later.
     #
-    # config.time_zone = "Central Time (US & Canada)"
+    config.time_zone = "Asia/Tokyo"
+    config.i18n.default_locale = :ja
     # config.eager_load_paths << Rails.root.join("extras")
 
     # Don't generate system test files.

@@ -4,6 +4,8 @@ class Poll < ApplicationRecord
 
   enum :status, { draft: 0, open: 1, closed: 2 }
 
+  accepts_nested_attributes_for :choices, allow_destroy: true
+
   validates :title, presence: true
   validates :slug, presence: true, uniqueness: true
 

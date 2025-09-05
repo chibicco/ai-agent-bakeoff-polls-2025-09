@@ -7,6 +7,8 @@ class Poll < ApplicationRecord
   validates :title, presence: true
   validates :slug, presence: true, uniqueness: true
 
+  before_validation :ensure_slug, on: :create
+
   # 締切判定（アプリ層で close 相当の扱い）
   def ended?
     ends_at.present? && ends_at <= Time.current
@@ -21,5 +23,16 @@ class Poll < ApplicationRecord
   def total_votes_count
     choices.sum(:votes_count)
   end
-end
 
+  def to_param
+    slug
+  end
+
+  private
+
+  def ensure_slug
+    return if slug.present? && slug.size <= 80
+    base = title.to_s.parameterize.presence || SecureRandom.hex(4)
+    self.slug = base[0, 80]
+  end
+end

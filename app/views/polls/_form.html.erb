@@ -1,0 +1,33 @@
+<%= form_with(model: poll, class: "space-y-6") do |f| %>
+  <% if poll.errors.any? %>
+    <div class="rounded-xl border border-rose-200 bg-rose-50 p-4 text-rose-700">
+      <p class="font-medium">入力内容を確認してください（<%= poll.errors.count %>件）</p>
+      <ul class="list-disc list-inside text-sm mt-2">
+        <% poll.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= f.label :title, "タイトル", class: "block text-sm font-medium text-slate-700" %>
+    <%= f.text_field :title, required: true, class: "mt-1 block w-full rounded-lg border-slate-300 focus:border-indigo-500 focus:ring-indigo-500" %>
+  </div>
+
+  <div>
+    <%= f.label :description, "説明", class: "block text-sm font-medium text-slate-700" %>
+    <%= f.text_area :description, rows: 4, class: "mt-1 block w-full rounded-lg border-slate-300 focus:border-indigo-500 focus:ring-indigo-500" %>
+  </div>
+
+  <div>
+    <%= f.label :ends_at, "締切（任意）", class: "block text-sm font-medium text-slate-700" %>
+    <%= f.datetime_field :ends_at, class: "mt-1 block w-full rounded-lg border-slate-300 focus:border-indigo-500 focus:ring-indigo-500" %>
+  </div>
+
+  <div class="flex items-center gap-3">
+    <%= f.submit class: "inline-flex items-center rounded-lg bg-indigo-600 px-4 py-2 text-white hover:bg-indigo-700" %>
+    <%= link_to "キャンセル", (poll.persisted? ? poll_path(poll) : polls_path), class: "rounded-lg px-4 py-2 text-slate-700 border border-slate-200 hover:bg-slate-50" %>
+  </div>
+<% end %>
+

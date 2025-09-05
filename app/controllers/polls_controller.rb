@@ -12,6 +12,7 @@ class PollsController < ApplicationController
   def new
     @poll = Poll.new
     2.times { @poll.choices.build }
+    @poll.choices.build if params[:add_choice].present?
   end
 
   def create
@@ -24,7 +25,9 @@ class PollsController < ApplicationController
   end
 
   def edit
+    # 編集時も空の行を最低1つ用意。add_choice=1 でさらに1行追加
     @poll.choices.build if @poll.choices.empty?
+    @poll.choices.build if params[:add_choice].present?
   end
 
   def update

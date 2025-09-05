@@ -40,6 +40,14 @@
         </div>
       <% end %>
     </div>
+    <p class="mt-2 text-xs text-slate-500">空欄の行は保存時に無視されます。</p>
+    <div class="mt-3">
+      <% if f.object.persisted? %>
+        <%= link_to "＋ 選択肢を1行追加", edit_poll_path(f.object, add_choice: 1), class: "text-indigo-700 hover:underline" %>
+      <% else %>
+        <%= link_to "＋ 選択肢を1行追加", new_poll_path(add_choice: 1), class: "text-indigo-700 hover:underline" %>
+      <% end %>
+    </div>
   </fieldset>
 
   <div class="flex items-center gap-3">

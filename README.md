@@ -3,6 +3,10 @@
 Rails 8 を用いた **アンケート（投票）アプリ** の開発を、
 複数の **AI Agent** に任せて成果物を比較する実験用のリポジトリです。
 
+## Preview
+
+![Preview](./docs/assets/screenshot.jpeg)
+
 ## 🚀 プロジェクト概要
 
 - **テーマ**: 投票アプリ（Poll / Choice / Vote モデル）

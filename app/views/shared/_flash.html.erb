@@ -1,0 +1,14 @@
+<div class="max-w-3xl mx-auto px-4 sm:px-6 md:px-8 mt-4" aria-live="polite">
+  <% flash.each do |type, message| %>
+    <% next if message.blank? %>
+    <% color = case type.to_s
+      when 'notice' then 'bg-green-50 text-green-800 border-green-200'
+      when 'alert'  then 'bg-amber-50 text-amber-800 border-amber-200'
+      else 'bg-slate-50 text-slate-800 border-slate-200'
+    end %>
+    <div class="rounded-xl border #{color} px-4 py-3 mb-3" role="status">
+      <%= message %>
+    </div>
+  <% end %>
+</div>
+

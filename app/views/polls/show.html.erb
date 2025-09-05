@@ -39,7 +39,7 @@
               <% end %>
             </div>
           </fieldset>
-          <%= submit_tag "投票する", class: "inline-flex items-center rounded-lg bg-indigo-600 px-4 py-2 text-white hover:bg-indigo-700" %>
+          <%= submit_tag "投票する", class: "inline-flex items-center rounded-lg bg-indigo-600 px-4 py-2 text-white hover:bg-indigo-700", data: { turbo_submits_with: "送信中..." } %>
         <% end %>
       <% else %>
         <% total = @choices.sum(&:votes_count) %>

@@ -6,6 +6,7 @@ class PollsController < ApplicationController
   end
 
   def show
+    @choices = @poll.choices.order(id: :asc)
   end
 
   def new

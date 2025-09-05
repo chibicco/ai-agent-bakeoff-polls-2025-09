@@ -31,7 +31,7 @@
           <fieldset>
             <legend class="text-sm font-medium text-slate-700">1つ選んでください</legend>
             <div class="mt-3 space-y-2">
-              <% @poll.choices.each do |choice| %>
+              <% @choices.each do |choice| %>
                 <label class="flex items-center gap-3 text-slate-800">
                   <input type="radio" name="choice_id" value="<%= choice.id %>" class="h-4 w-4 text-indigo-600 border-slate-300 focus:ring-indigo-500">
                   <span><%= choice.label %></span>
@@ -42,7 +42,26 @@
           <%= submit_tag "投票する", class: "inline-flex items-center rounded-lg bg-indigo-600 px-4 py-2 text-white hover:bg-indigo-700" %>
         <% end %>
       <% else %>
-        <p class="text-slate-600">投票は締切または公開終了です。結果表示は次フェーズで整えます。</p>
+        <% total = @choices.sum(&:votes_count) %>
+        <div class="flex items-center justify-between mb-2">
+          <p class="text-slate-700 font-medium">結果</p>
+          <p class="text-slate-500 text-sm">合計: <%= total %> 票</p>
+        </div>
+        <div class="space-y-3">
+          <% @choices.each do |choice| %>
+            <% count = choice.votes_count %>
+            <% percent = total > 0 ? ((count.to_f / total) * 100.0).round : 0 %>
+            <div>
+              <div class="flex items-center justify-between text-sm">
+                <span class="text-slate-800"><%= choice.label %></span>
+                <span class="text-slate-600"><%= percent %>%（<%= count %>）</span>
+              </div>
+              <div class="mt-1 h-3 w-full rounded-full bg-indigo-100">
+                <div class="h-3 rounded-full bg-indigo-600" style="width: <%= percent %>%"></div>
+              </div>
+            </div>
+          <% end %>
+        </div>
       <% end %>
     </div>
   </div>
